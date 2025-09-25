@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",        // Dossier source principal du projet (TS)
+    "outDir": "./dist",        // Dossier où le compilateur met le JS compilé
+
+    // ==========================
+    // 2. Environment Settings (paramètres pour Node et modules)
+    // ==========================
+    "module": "nodenext",                 // Type de module JS (ESM pour Node 18+)
+    "target": "esnext",                   // Version JS de sortie (ESNext = moderne)
+    "lib": ["esnext"],                     // Librairies globales disponibles (Promise, Map, etc.)
+    "types": ["node"],                     // Déclarations globales disponibles (process, Buffer…)
+    "esModuleInterop": true,               // Permet d’importer les modules CommonJS avec `import x from "y"`
+    "allowSyntheticDefaultImports": true,  // Permet d’importer par défaut même si le module n’a pas d’export default
+    "resolveJsonModule": true,     
+            // Permet d’importer directement les fichiers JSON
+
+    // ==========================
+    // 3. Other Outputs (options de sortie / build)
+    // ==========================
+    "sourceMap": true,          // Génère les fichiers .map pour le debug (stack traces TS lisibles)
+    "declaration": true,        // Génère les fichiers .d.ts pour exposer les types du code
+    "declarationMap": true,     // Génère les fichiers .d.ts.map pour faciliter le debug des types
+
+    // ==========================
+    // 4. Stricter Typechecking Options (vérifications de types strictes)
+    // ==========================
+    "strict": true,                     // Active toutes les vérifications strictes de TS
+    "noUncheckedIndexedAccess": true,   // Signale si accès à un tableau ou objet peut retourner undefined
+    "exactOptionalPropertyTypes": true, // Différencie une propriété optionnelle de `prop?: string` vs `prop: string | undefined`
+
+    // ==========================
+    // 5. Style Options (bonnes pratiques et alertes)
+    // ==========================
+    "noImplicitReturns": true,          // Vérifie que toutes les fonctions retournent quelque chose si elles doivent
+    "noImplicitOverride": true,         // Force l’utilisation de `override` pour les méthodes surchargées
+    "noUnusedLocals": true,             // Avertit si une variable locale n’est jamais utilisée
+    "noUnusedParameters": true,         // Avertit si un paramètre de fonction n’est jamais utilisé
+    "noFallthroughCasesInSwitch": true,// Empêche de passer d’un case à l’autre sans break
+
+    // ==========================
+    // 6. Recommended Options (options modernes recommandées)
+    // ==========================
+    "isolatedModules": true,            // Assure que chaque fichier peut être compilé indépendamment (utile pour Babel/ESM)
+    "moduleDetection": "force",         // Force TS à détecter les modules même si pas explicite
+    "skipLibCheck": true                // Ignore la vérification des types des bibliothèques (accélère la compilation)
+  },
+
+  // ==========================
+  // 7. Inclusion / exclusion
+  // ==========================
+  "include": ["src/**/*"],              // Tous les fichiers TS dans src/ sont compilés
+  "exclude": ["node_modules", "dist"]   // Exclut node_modules et le dossier dist pour ne pas les compiler
+}

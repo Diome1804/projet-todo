@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tasks          Task[]
+  TaskPermission TaskPermission[]
+  actionLogs     ActionLog[]
+}
+
+model Task {
+  id              Int     @id @default(autoincrement())
+  lex_name        String
+  lex_description String
+  completed       Boolean @default(false)
+  photoUrl        String?
+  audioUrl        String?
+
+  userId      Int
+  user        User             @relation(fields: [userId], references: [id])
+  permissions TaskPermission[]
+  logs        ActionLog[]
+}
+
+model TaskPermission {
+  id        Int     @id @default(autoincrement())
+  taskId    Int
+  granteeId Int
+  canEdit   Boolean @default(false)
+  canDelete Boolean @default(false)
+
+  task    Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  grantee User @relation(fields: [granteeId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, granteeId])
+}
+
+enum ActionType {
+  READ
+  UPDATE
+  DELETE
+  CREATE
+}
+
+model ActionLog {
+  id        Int        @id @default(autoincrement())
+  taskId    Int
+  actorId   Int
+  action    ActionType
+  createdAt DateTime   @default(now())
+  details   String?
+
+  task  Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  actor User @relation(fields: [actorId], references: [id], onDelete: Cascade)
+
+  @@index([taskId, createdAt])
+  @@index([actorId, createdAt])
+}

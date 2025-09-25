@@ -1,0 +1,1 @@
+npx node -e "console.log(require('jsonwebtoken').sign({id:1}, 'supersecret'))"

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `User` ALTER COLUMN `fullName` DROP DEFAULT,
+    ALTER COLUMN `updatedAt` DROP DEFAULT;
