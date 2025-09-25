@@ -1,0 +1,97 @@
+import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+
+const Navigation = () => {
+  const { logout, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  return (
+    <nav className="bg-white border-b border-gray-200 shadow-sm">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center space-x-8">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
+              }
+            >
+              Dashboard
+            </NavLink>
+            <NavLink
+              to="/tasks"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
+              }
+            >
+              Tasks
+            </NavLink>
+            <NavLink
+              to="/tasks/new"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
+              }
+            >
+              Add Task
+            </NavLink>
+            <NavLink
+              to="/history"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
+              }
+            >
+              History
+            </NavLink>
+            <NavLink
+              to="/permissions"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
+              }
+            >
+              Permissions
+            </NavLink>
+            <NavLink
+              to="/actions"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-700 hover:text-blue-600'
+              }
+            >
+              Actions
+            </NavLink>
+          </div>
+
+          <div className="flex items-center">
+            {isAuthenticated && (
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+              >
+                Logout
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navigation;
