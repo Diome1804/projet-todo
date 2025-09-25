@@ -150,34 +150,7 @@ Le frontend sera accessible sur `http://localhost:5173`
    - Consultez l'historique des actions sur les tâches
    - Vérifiez que toutes les modifications sont tracées
 
-## 📁 Structure du projet
 
-```
-/
-├── src/                    # Backend (Node.js/TypeScript)
-│   ├── controllers/        # Contrôleurs API
-│   ├── routes/            # Routes Express
-│   ├── services/          # Logique métier
-│   ├── middlewares/       # Middlewares personnalisés
-│   ├── repositories/      # Accès aux données
-│   ├── types/             # Types TypeScript
-│   ├── utils/             # Utilitaires
-│   └── index.ts           # Point d'entrée
-├── Front-task/            # Frontend (React)
-│   ├── src/
-│   │   ├── components/    # Composants React
-│   │   ├── pages/         # Pages de l'application
-│   │   ├── context/       # Context React
-│   │   ├── hooks/         # Hooks personnalisés
-│   │   └── services/      # Services API
-│   └── public/            # Assets statiques
-├── prisma/                # Configuration base de données
-│   ├── schema.prisma      # Schéma Prisma
-│   ├── seed.js           # Données de test
-│   └── migrations/        # Migrations DB
-├── uploads/               # Fichiers uploadés
-└── package.json           # Dépendances backend
-```
 
 ## 🔧 Scripts disponibles
 
